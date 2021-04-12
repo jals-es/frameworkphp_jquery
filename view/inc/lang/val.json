@@ -1,0 +1,25 @@
+{
+    "val": {
+        "title": "Restaurant",
+        "Homepage": "Inici",
+        "Products": "Productes",
+        "Services": "Servicis",
+        "About Us": "Sobre Nosaltres",
+        "Contact Us": "Contactans",
+        "Spanish": "Espanyol",
+        "English": "Angles",
+        "Valencian": "Valencià",
+        "Languages": "Idiomes",
+        "NoProducts": "No hi han productes disponibles.",
+        "Read": "Llegir",
+        "Update": "Modificar",
+        "Delete": "Borrar",
+        "Back": "Tornar",
+        "CreateProd": "Crear un producte",
+        "UpdateProd": "Modificar un producte",
+        "ListProd": "LLISTA DE PRODUCTES",
+        "enviar": "Enviar",
+        "categories-title": "CATEGORIES",
+        "Shop": "Tenda"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "en": {
+        "title": "Restaurant",
+        "Homepage": "Homepage",
+        "Products": "Products",
+        "Services": "Services",
+        "About Us": "About Us",
+        "Contact Us": "Contact Us",
+        "Spanish": "Spanish",
+        "English": "English",
+        "Valencian": "Valencian",
+        "Languages": "Languages",
+        "NoProducts": "There's not available Products.",
+        "Read": "Read",
+        "Update": "Update",
+        "Delete": "Delete",
+        "Back": "Back",
+        "CreateProd": "Create a product",
+        "UpdateProd": "Update a product",
+        "ListProd": "LIST OF PRODUCTS",
+        "enviar": "Send",
+        "categories-title": "CATEGORIES",
+        "Shop": "Shop"
+    }
+}
