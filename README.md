@@ -1,6 +1,6 @@
-# PHP-MVC-Jquery | RESTAURANT
+# FRAMEWORKPHP_ANGULAR | RESTAURANT
 
-_Project of the second quarter of 1st of Web Applications Development_
+_Project of the third quarter of 1st of Web Applications Development_
 
 * [WEBSITE] - _Click here to go to the web._
 
