@@ -107,6 +107,6 @@ function click_slider() {
 
 $(document).ready(function() {
     // alert("hola");
-    load_slider();
-    load_categories();
+    //load_slider();
+    //load_categories();
 });
