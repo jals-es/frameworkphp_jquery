@@ -30,7 +30,7 @@ class common {
         }// end_else
     }// end_loadView
     
-    function accessModel($model, $function = null, $args = null) {
+    static function accessModel($model, $function = null, $args = null) {
         $dir = explode('_', $model);
         $path = constant('MODEL_PATH_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
         if (file_exists($path)) {

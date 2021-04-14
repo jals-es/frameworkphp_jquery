@@ -19,7 +19,7 @@ define ('VIEW_PATH_CONTACT', SITE_ROOT . 'module/contact/view/');
 
 //Home
 define ('VIEW_PATH_HOME', SITE_ROOT . 'module/home/view/');
-define ('MODEL_PATH_HOME', SITE_ROOT . 'module/home/model/');
+define ('MODEL_PATH_HOME', SITE_ROOT . 'module/home/model/model/');
 
 //Shop
 define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
@@ -43,6 +43,8 @@ define ('MODEL_PATH_PROFILE', SITE_ROOT . '/module/profile/model/model/');
 // Friendly
 define('URL_FRIENDLY', TRUE);
 
-/*if ($_GET['op'] == 'get') {
-    echo json_encode(URL_FRIENDLY);
-}*/
+if(isset($_GET['op'])){
+    if ($_GET['op'] == 'get') {
+        echo json_encode(URL_FRIENDLY);
+    }
+}
