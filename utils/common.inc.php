@@ -2,26 +2,28 @@
 //////
 class common {
     static function loadError() {
-        require_once (VIEW_PATH_INC . 'top_page.html');
+        require_once (VIEW_PATH_INC . 'top_page.php');
         require_once (VIEW_PATH_INC . 'menu.html');
-        require_once (VIEW_PATH_INC . 'header.html');
-        require_once (VIEW_PATH_INC . 'error404.html');
-        require_once (VIEW_PATH_INC . 'footer.html');
-        require_once (VIEW_PATH_INC . 'top_page.html');
+        require_once (VIEW_PATH_INC . 'header.php');
+        require_once (VIEW_PATH_INC . 'error404.php');
+        require_once (VIEW_PATH_INC . 'footer.php');
+        require_once (VIEW_PATH_INC . 'generalbottom_page.php');
+        require_once (VIEW_PATH_INC . 'bottom_page.php');
     }// end_loadError
     
     static function loadView($module_viewpath, $view) {
-        $topPage = $module_viewpath.'top_page.html';
-        $bottomPage = $module_viewpath.'bottom_page.html';
+        $topPage = $module_viewpath.'top_page.php';
+        $bottomPage = $module_viewpath.'bottom_page.php';
         $viewPage = $module_viewpath.$view;
         //////
         if ((file_exists($topPage)) && (file_exists($viewPage)) && (file_exists($bottomPage))) {
             // echo "file exists";
             require_once ($topPage);
             require_once (VIEW_PATH_INC . 'menu.html');
-            require_once (VIEW_PATH_INC . 'header.html');
+            require_once (VIEW_PATH_INC . 'header.php');
             require_once ($viewPage);
-            require_once (VIEW_PATH_INC . 'footer.html');
+            require_once (VIEW_PATH_INC . 'footer.php');
+            require_once (VIEW_PATH_INC . 'generalbottom_page.php');
             require_once ($bottomPage);
             
         }else {

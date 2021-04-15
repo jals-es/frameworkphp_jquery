@@ -1,0 +1,1 @@
+const SITE_PATH = "http://" + document.location.hostname + "/clase/frameworkphp_angular/";

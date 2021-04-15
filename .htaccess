@@ -20,5 +20,3 @@ Rewriterule ^([^/]*)/([^/]*)$ index.php?page=$1&op=$2 [L,NC,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 Rewriterule ^([^/]*)$ index.php?page=$1 [L,NC,QSA]
-
-#RewriteRule ^(\w+)/(\w+)/?$ index.php?page=$1&op=$2

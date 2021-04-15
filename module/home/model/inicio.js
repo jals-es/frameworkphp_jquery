@@ -8,7 +8,7 @@ function load_slider() {
             // console.log(response);
             for (row in response) {
                 // console.log(response);
-                $('<div></div>').attr({ 'class': 'item', 'style': 'background-image: url(view/img/uploads/' + response[row].img }).appendTo('.owl-carousel')
+                $('<div></div>').attr({ 'class': 'item', 'style': 'background-image: url(' + SITE_PATH + 'view/img/uploads/' + response[row].img }).appendTo('.owl-carousel')
                     .html('<label id="' + response[row].cod_prod + '" class="title_prod">' + response[row].name + '</label>');
                 // console.log(response.img);
             }
@@ -68,7 +68,7 @@ function load_categories() {
             $('#categories').attr({ 'class': 'row justify-content-around py-5' });
             for (row in response) {
                 // console.log(response);
-                $('<div></div>').attr({ 'id': response[row].name, 'class': 'categoria catego row align-items-center', 'style': 'background-image: url(view/img/uploads/' + response[row].img }).appendTo('#categories')
+                $('<div></div>').attr({ 'id': response[row].name, 'class': 'categoria catego row align-items-center', 'style': 'background-image: url(' + SITE_PATH + 'view/img/uploads/' + response[row].img }).appendTo('#categories')
                     .html('<label class="title_catego mx-auto">' + response[row].name + '</label>');
                 // console.log(response.img);
             }
@@ -85,6 +85,7 @@ function load_categories() {
             });
 
         }).fail(function(response) {
+            console.log("ajaxerror");
             // window.location.href = "?page=503";
             // console.log(response);
         });

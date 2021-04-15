@@ -14,11 +14,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="view/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= CSS_PATH?>bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="view/css/style.css">
+    <link rel="stylesheet" href="<?= CSS_PATH?>style.css">
     <!-- responsive-->
-    <link rel="stylesheet" href="view/css/responsive.css">
+    <link rel="stylesheet" href="<?= CSS_PATH?>responsive.css">
     <!-- awesome fontfamily -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Mis links -->
@@ -27,5 +27,5 @@
 <body class="main-layout">
     <!-- loader  -->
     <div class="loader_bg">
-        <div class="loader"><img src="view/img/loading.gif" alt="" /></div>
+        <div class="loader"><img src="<?= IMG_PATH?>loading.gif" alt="" /></div>
     </div>
