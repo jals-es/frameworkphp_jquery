@@ -14,6 +14,7 @@ define ('RESOURCES', SITE_ROOT . 'resources/'); // Resources Path
 define ('UTILS', SITE_ROOT . 'utils/'); // Utils Path
 //////
 // Contact
+define ('JS_PATH_CONTACT', SITE_PATH . 'module/contact/view/js/');
 define ('MODEL_PATH_CONTACT', SITE_ROOT . 'module/contact/model/');
 define ('VIEW_PATH_CONTACT', SITE_ROOT . 'module/contact/view/');
 

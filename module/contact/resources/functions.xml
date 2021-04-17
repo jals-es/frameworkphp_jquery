@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list</name>
+        <uri>list</uri>
+    </function>
+    <function>
+        <name>send_email</name>
+        <uri>send_email</uri>
+    </function>
+</functions>

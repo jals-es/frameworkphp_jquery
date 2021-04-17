@@ -3,8 +3,14 @@
 require ('autoload.php');
 ob_start();
 // session_start();
-// require ('paths.php');
-// require ('utils/common.inc.php');
+
+if (PRODUCTION) { //estamos en producción
+    ini_set('display_errors', '1');
+    ini_set('error_reporting', E_ERROR | E_WARNING); //error_reporting(E_ALL) ;
+} else {
+    ini_set('display_errors', '0');
+    ini_set('error_reporting', '0'); //error_reporting(0); 
+}
 
 class router {
     private $uriModule;
