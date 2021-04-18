@@ -11,6 +11,7 @@
 <!-- <script type="text/javascript" src="view/js/menu.js"></script> -->
 <script type="text/javascript" src="<?= JS_PATH?>credentials.js"></script>
 <script src="<?= JS_PATH?>jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="<?= JS_PATH?>popper.min.js"></script>
 <script src="<?= JS_PATH?>bootstrap.bundle.min.js"></script>
 <script src="<?= JS_PATH?>owl.carousel.min.js"></script>
