@@ -8,16 +8,18 @@ function show_filter_categories() {
     $("<h3>Categorías:</h3>").attr({ "id": "title_filter_categories" }).appendTo("#options-bar");
     $("<select></select>").attr({ "id": "filter_categories" }).appendTo("#options-bar");
     $("<option>Todas</option>").attr({ "value": "all" }).appendTo("#filter_categories");
-    $.ajax({
-        type: "GET",
-        url: "module/shop/controller/controller_shop.php",
-        data: { "op": "get_catego" },
-        dataType: "JSON"
-    }).done(function(response) {
 
-        for (row in response) {
-            $("<option><span>" + response[row].name + "</span><span>(" + response[row].nprods + ")</span></option>").attr({ "value": response[row].name }).appendTo("#filter_categories");
-        }
+    friendlyURL("?page=shop&op=get_catego").then(function(data) {
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON"
+        }).done(function(response) {
+            // console.log(response);
+            for (row in response) {
+                $("<option><span>" + response[row].name + "</span></option>").attr({ "value": response[row].name }).appendTo("#filter_categories");
+            }
+        });
     });
 
     event_filter_categories();
@@ -28,44 +30,46 @@ function show_price_range() {
     $("<h3>Precio:</h3>").attr({ "style": "margin-top: 25px;" }).appendTo("#options-bar");
 
     print_range_inp("#options-bar");
+    friendlyURL("?page=shop&op=get_range_prices").then(function(data) {
+        $.ajax({
+            type: "GET",
+            url: data,
+            dataType: "JSON"
+        }).done(function(response) {
+            // alert("hola");
+            // console.log(response);
+            set_price_range(response[0]);
 
-    $.ajax({
-        type: "GET",
-        url: "module/shop/controller/controller_shop.php",
-        data: { "op": "get_range_prices" },
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
-        set_price_range(response);
-
-    }).fail(function(response) {
-        var price = { "min": "0", "max": "9999999" }
-        set_price_range(price);
+        }).fail(function(response) {
+            var price = { "min": "0", "max": "9999999" }
+            set_price_range(price);
+        });
     });
-
 
 }
 
 function show_filter_ingredientes() {
     $("<h3>Ingredientes:</h3>").attr({ "id": "title_filter_ingredientes" }).appendTo("#options-bar");
     $("<div></div").attr({ "id": "filter_ingredientes" }).appendTo("#options-bar");
-    $.ajax({
-        type: "GET",
-        url: "module/shop/controller/controller_shop.php",
-        data: { "op": "get_ingredientes" },
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
-        for (row in response) {
-            $('<input type="checkbox" checked/>').attr({ "value": response[row], "name": "filter_ing[]" }).appendTo("#filter_ingredientes");
-            $('<label>' + response[row] + '</label><br>').attr({ "class": "ml-1" }).appendTo("#filter_ingredientes");
-        }
 
-        event_filter_ingredientes();
+    friendlyURL("?page=shop&op=get_ingredientes").then(function(data) {
+        $.ajax({
+            type: "GET",
+            url: data,
+            dataType: "JSON"
+        }).done(function(response) {
+            // console.log(response);
+            for (row in response) {
+                $('<input type="checkbox" checked/>').attr({ "value": response[row], "name": "filter_ing[]" }).appendTo("#filter_ingredientes");
+                $('<label>' + response[row] + '</label><br>').attr({ "class": "ml-1" }).appendTo("#filter_ingredientes");
+            }
 
-    }).fail(function(response) {
-        console.log(response);
+            event_filter_ingredientes();
 
+        }).fail(function(response) {
+            console.log(response);
+
+        });
     });
 }
 

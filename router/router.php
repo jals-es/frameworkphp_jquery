@@ -35,12 +35,12 @@ class router {
             $this -> uriModule = 'home';
         }
         if(isset($_GET['op'])){
-            // $this -> uriModule = ($_GET['op'] === "") ? 'list' : $_GET['op'];
-            if($_GET['op'] === ""){
-                $this -> uriFunction = 'list';
-            }else{
-                $this -> uriFunction = $_GET['op'];
-            }
+            $this -> uriFunction = ($_GET['op'] === "") ? 'list' : $_GET['op'];
+            // if($_GET['op'] === ""){
+            //     $this -> uriFunction = 'list';
+            // }else{
+            //     $this -> uriFunction = $_GET['op'];
+            // }
         }else{
             $this -> uriFunction = 'list';
         }

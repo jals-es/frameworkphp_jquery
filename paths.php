@@ -24,6 +24,8 @@ define ('VIEW_PATH_HOME', SITE_ROOT . 'module/home/view/');
 define ('MODEL_PATH_HOME', SITE_ROOT . 'module/home/model/model/');
 
 //Shop
+define ('CSS_PATH_SHOP', SITE_PATH . 'module/shop/view/css/');
+define ('JS_PATH_SHOP', SITE_PATH . 'module/shop/view/js/');
 define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
 define ('MODEL_PATH_SHOP', SITE_ROOT . 'module/shop/model/model/');
 

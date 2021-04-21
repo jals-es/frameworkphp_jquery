@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="full d-flex">
-                    <a class="logo col align-self-center" href="./"><img src="<?= IMG_PATH?>logo.png" alt="#" /></a>
+                    <a class="logo col align-self-center" href="<?= SITE_PATH?>"><img src="<?= IMG_PATH?>logo.png" alt="#" /></a>
                 </div>
             </div>
             <div class="col-md-10">

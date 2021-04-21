@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list</name>
+        <uri>list</uri>
+    </function>
+    <function>
+        <name>catego</name>
+        <uri>catego</uri>
+    </function>
+    <function>
+        <name>prod</name>
+        <uri>prod</uri>
+    </function>
+    <function>
+        <name>all_prod</name>
+        <uri>all_prod</uri>
+    </function>
+    <function>
+        <name>visit_prod</name>
+        <uri>visit_prod</uri>
+    </function>
+    <function>
+        <name>get_range_prices</name>
+        <uri>get_range_prices</uri>
+    </function>
+    <function>
+        <name>search</name>
+        <uri>search</uri>
+    </function>
+    <function>
+        <name>get_catego</name>
+        <uri>get_catego</uri>
+    </function>
+    <function>
+        <name>get_ingredientes</name>
+        <uri>get_ingredientes</uri>
+    </function>
+    <function>
+        <name>fav</name>
+        <uri>fav</uri>
+    </function>
+    <function>
+        <name>get_favs</name>
+        <uri>get_favs</uri>
+    </function>
+</functions>

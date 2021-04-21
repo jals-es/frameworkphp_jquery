@@ -1,9 +1,9 @@
 <div class="overlay"></div>
 <!-- Javascript files-->
 
-<script type="text/javascript" src="view/js/range_inp.js"></script>
-<script type="text/javascript" src="module/shop/view/js/shop.js"></script>
-<script type="text/javascript" src="module/shop/view/js/filters.js"></script>
+<script type="text/javascript" src="<?= JS_PATH?>range_inp.js"></script>
+<script type="text/javascript" src="<?= JS_PATH_SHOP?>shop.js"></script>
+<script type="text/javascript" src="<?= JS_PATH_SHOP?>filters.js"></script>
 <style>
     #owl-demo .item {
         margin: 3px;

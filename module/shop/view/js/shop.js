@@ -24,6 +24,9 @@ function show_content() {
 function all_shop(offset) {
     var limit = 12;
 
+
+
+
     var filters = get_filters();
     var catego;
     var price_min;
@@ -54,29 +57,32 @@ function all_shop(offset) {
             }
         }
     }
+    friendlyURL("?page=shop&op=all_prod").then(function(data) {
+        // alert(offset + " + " + limit + " + " + catego + " + " + price_min + " + " + price_max + " + " + ingredientes);
+        // alert(data);
+        $.ajax({
+            type: "POST",
+            url: data,
+            data: { "offset": offset, "limit": limit, "catego": catego, "price_min": price_min, "price_max": price_max, "ingredientes": ingredientes },
+            dataType: "JSON"
+        }).done(function(response) {
+            // alert("hola");
+            // console.log(response);
 
+            // set_catego(response);
+            set_all_prods(response, limit, offset);
 
+            show_prod();
 
-    $.ajax({
-        type: "POST",
-        url: "module/shop/controller/controller_shop.php?op=all_prod",
-        data: { "offset": offset, "limit": limit, "catego": catego, "price_min": price_min, "price_max": price_max, "ingredientes": ingredientes },
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
+            // slider();
 
-        // set_catego(response);
-        set_all_prods(response, limit, offset);
-
-        show_prod();
-
-        // slider();
-
-    }).fail(function(response) {
-        // console.log(response.responseText);
-        no_result();
-        // window.location.href = "?page=503";
-        // console.log(response);
+        }).fail(function(response) {
+            // console.log(response);
+            // console.log(response.responseText);
+            no_result();
+            // window.location.href = "?page=503";
+            // console.log(response);
+        });
     });
 }
 
@@ -86,7 +92,7 @@ function set_all_prods(response, limit, offset) {
     for (row in response) {
         if (row != 0) {
             $("<div></div>").attr({ "class": "prod_content" }).appendTo("#all_shop_content")
-                .html('<div class="img-prod"><img src="view/img/uploads/' + response[row].img + '" alt="Generic placeholder image"></div>' +
+                .html('<div class="img-prod"><img src="' + SITE_PATH + 'view/img/uploads/' + response[row].img + '" alt="Generic placeholder image"></div>' +
                     '<h4>' + response[row].name + '</h4>' +
                     '<h5>' + response[row].precio + '€</h5>' +
                     '<p><a id="' + response[row].cod_prod + '" class="btn btn-default ver" role="button">Ver &raquo;</a></p>' +
@@ -185,93 +191,108 @@ function btn_nav(action, offset, limit, pag) {
 }
 
 function get_prod(id_prod) {
-    $.ajax({
-        type: "GET",
-        url: "module/shop/controller/controller_shop.php?op=prod&id=" + id_prod,
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
-        $("<div id='details'></div>").appendTo('#content-shop');
-        var content = "";
-        var ingredientes = "";
-        var ingre = "";
-        for (row in response) {
-            switch (row) {
-                case "cod_prod":
-                    content += '<h1>' + row + ': <span id =' + row + '>' + response[row] + '</span></h1>';
-                    break;
-                case "ingredientes":
-                    ingredientes = response[row].split(":");
-                    for (ing in ingredientes) {
-                        if (ing == 0) {
-                            ingre = ingredientes[ing];
-                        } else {
-                            ingre += ", " + ingredientes[ing];
-                        }
-                    }
-                    content += '<div>' + row + ': <span id =' + row + '>' + ingre + '</span></div>';
-                    break;
-                case "img":
-                    content += '<div class="prod-img"><img src="view/img/uploads/' + response[row] + '"></div>';
-                    break;
-                default:
-                    content += '<div>' + row + ': <span id =' + row + '>' + response[row] + '</span></div>';
-                    break;
+    friendlyURL("?page=shop&op=prod").then(function(data) {
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON",
+            data: {
+                id: id_prod
             }
-        }
+        }).done(function(response) {
+            // console.log(response);
+            $("<div id='details'></div>").appendTo('#content-shop');
+            var content = "";
+            var ingredientes = "";
+            var ingre = "";
+            for (row in response[0]) {
+                switch (row) {
+                    case "cod_prod":
+                        content += '<h1>' + row + ': <span id =' + row + '>' + response[0][row] + '</span></h1>';
+                        break;
+                    case "ingredientes":
+                        ingredientes = response[0][row].split(":");
+                        for (ing in ingredientes) {
+                            if (ing == 0) {
+                                ingre = ingredientes[ing];
+                            } else {
+                                ingre += ", " + ingredientes[ing];
+                            }
+                        }
+                        content += '<div>' + row + ': <span id =' + row + '>' + ingre + '</span></div>';
+                        break;
+                    case "img":
+                        content += '<div class="prod-img"><img src="' + SITE_PATH + 'view/img/uploads/' + response[0][row] + '"></div>';
+                        break;
+                    default:
+                        content += '<div>' + row + ': <span id =' + row + '>' + response[0][row] + '</span></div>';
+                        break;
+                }
+            }
 
-        $("<div class='prod-info'></div>").appendTo('#details')
-            .html(content);
-        $("<div class='button_action go_shop' data-tr='Back'></div>").appendTo('.prod-info');
-        change_lang();
-        show_shop();
-        set_visita(response.cod_prod);
-        $("<p>Libros Relacionados:</p>").attr({ "class": "related-title" }).appendTo("#details");
-        $("<div></div>").attr({ "id": "all_shop_content", "style": "width: 100% !important; display: flex-box !important;" }).appendTo("#details");
-        show_related(0);
+            $("<div class='prod-info'></div>").appendTo('#details')
+                .html(content);
+            $("<div class='button_action go_shop' data-tr='Back'></div>").appendTo('.prod-info');
+            change_lang();
+            show_shop();
+            set_visita(response[0].cod_prod);
+            $("<p>Libros Relacionados:</p>").attr({ "class": "related-title" }).appendTo("#details");
+            $("<div></div>").attr({ "id": "all_shop_content", "style": "width: 100% !important; display: flex-box !important;" }).appendTo("#details");
+            show_related(0);
 
-    }).fail(function(response) {
-        no_result();
-        // window.location.href = "?page=503";
-        // console.log(response);
+        }).fail(function(response) {
+            console.log(response);
+            no_result();
+            // window.location.href = "?page=503";
+            // console.log(response);
+        });
     });
 }
 
 function set_visita(id_prod) {
-    $.ajax({
-        type: "POST",
-        url: "module/shop/controller/controller_shop.php?op=visit_prod",
-        data: { "id_prod": id_prod },
-        dataType: "JSON"
-    }).done(function(response) {
+    friendlyURL("?page=shop&op=visit_prod").then(function(data) {
+        // alert(id_prod);
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON",
+            data: { "id_prod": id_prod }
+        }).done(function(response) {
 
-        // console.log(response);
+            // console.log(response);
 
-    }).fail(function(response) {
+        }).fail(function(response) {
 
-        console.log(response);
+            console.log(response);
 
+        });
     });
 }
 
 function get_catego(type) {
-    $.ajax({
-        type: "GET",
-        url: "module/shop/controller/controller_shop.php?op=catego&id=" + type,
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
+    friendlyURL("?page=shop&op=catego").then(function(data) {
+        // alert(type);
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON",
+            data: {
+                id_prod: type
+            }
+        }).done(function(response) {
+            // console.log(response);
 
-        set_catego(response);
+            set_catego(response);
 
-        slider();
+            slider();
 
-        show_prod();
+            show_prod();
 
-    }).fail(function(response) {
-        no_result();
-        // window.location.href = "?page=503";
-        // console.log(response);
+        }).fail(function(response) {
+            no_result();
+            // window.location.href = "?page=503";
+            console.log(response);
+        });
     });
 }
 
@@ -286,7 +307,7 @@ function set_catego(response) {
         }
         if (response[row].type == catego) {
             $('<div></div>').attr({ 'class': 'item' }).appendTo("#slider-" + catego + "-content")
-                .html('<img src="view/img/uploads/' + response[row].img + '" alt="Generic placeholder image">' +
+                .html('<img src="' + SITE_PATH + 'view/img/uploads/' + response[row].img + '" alt="Generic placeholder image">' +
                     '<h4>' + response[row].name + '</h4>' +
                     '<h5>' + response[row].precio + '€</h5>' +
                     '<p><a id="' + response[row].cod_prod + '" class="btn btn-default ver" role="button">Ver &raquo;</a></p>');

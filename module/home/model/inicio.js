@@ -103,7 +103,7 @@ function click_categories() {
         localStorage.setItem('shop_filter', 'catego');
         localStorage.setItem('shop_filter_id', id_catego);
 
-        window.location = "?page=shop";
+        friendlyURL("?page=shop/").then(function(data) { window.location = data; });
     });
 }
 
@@ -114,7 +114,7 @@ function click_slider() {
         localStorage.setItem('shop_filter', 'prod');
         localStorage.setItem('shop_filter_id', id_prod);
 
-        window.location = "?page=shop";
+        friendlyURL("?page=shop/").then(function(data) { window.location = data; });
     });
 }
 
