@@ -20,21 +20,20 @@ function set_api() {
 }
 
 function initMap() {
+    friendlyURL("?page=general&op=locales").then(function(data) {
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON"
+        }).done(function(response) {
+            // console.log(response);
 
-    $.ajax({
-        type: "GET",
-        url: "module/general/controller/controller_general.php",
-        data: { "op": "locales" },
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log(response);
+            posicion_cliente(response);
 
-        posicion_cliente(response);
-
-    }).fail(function(response) {
-        console.log(response);
+        }).fail(function(response) {
+            console.log(response);
+        });
     });
-
 }
 
 function showMap(response, cliente) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>locales</name>
+        <uri>locales</uri>
+    </function>
+    <function>
+        <name>search</name>
+        <uri>search</uri>
+    </function>
+    <function>
+        <name>checksession</name>
+        <uri>checksession</uri>
+    </function>
+</functions>

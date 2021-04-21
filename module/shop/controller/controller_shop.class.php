@@ -132,7 +132,12 @@ class controller_shop{
         echo json_encode($return);
     }
     function search(){
-        
+        $content = $_POST['content'];
+        if(isset($content)){
+            echo common::accessModel('shop_model', 'search', [$content]) -> getResolve();
+        }else{
+            echo "error";
+        }
     }
     function get_catego(){
         echo common::accessModel('shop_model', 'get_catego_names') -> getResolve();

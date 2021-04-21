@@ -39,4 +39,7 @@ class shop_model {
     public function visit_prod($args){
         return $this -> bll -> visit_prod_BLL($args);
     }
+    public function search($args){
+        return $this -> bll -> search_BLL($args);
+    }
 }// end_shop_model

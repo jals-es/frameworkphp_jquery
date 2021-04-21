@@ -25,17 +25,22 @@ function events_search() {
 
     $("#myInput").on("keyup", function() {
         // console.log(this.value);
-        if (this.value !== "") {
-            $.ajax({
-                type: "POST",
-                url: "module/general/controller/controller_general.php?op=search",
-                data: { "search": this.value },
-                dataType: "JSON"
-            }).done(function(response) {
-                // console.log(response);
-                set_search(response);
-            }).fail(function(response) {
-                set_search({ "name": "No items found" });
+        valueInp = this.value;
+        if (valueInp !== "") {
+            friendlyURL("?page=general&op=search").then(function(data) {
+                // console.log(valueInp);
+                $.ajax({
+                    type: "POST",
+                    url: data,
+                    data: { "search": valueInp },
+                    dataType: "JSON"
+                }).done(function(response) {
+                    // console.log(response);
+                    set_search(response);
+                }).fail(function(response) {
+                    // console.log(response);
+                    set_search({ "name": "No items found" });
+                });
             });
         } else {
             set_search("no_text");
@@ -59,14 +64,14 @@ function events_search() {
 function action_search(search) {
     localStorage.setItem("shop_filter", "search");
     localStorage.setItem("shop_filter_id", search);
-    window.location.href = "?page=shop";
+    friendlyURL("?page=shop/").then(function(data) { window.location.href = data; });
 }
 
 function events_drop() {
     $(".itemdrop").on("click", function() {
         localStorage.setItem("shop_filter", "prod");
         localStorage.setItem("shop_filter_id", this.id);
-        window.location.href = "?page=shop";
+        friendlyURL("?page=shop/").then(function(data) { window.location.href = data; });
     });
 }
 

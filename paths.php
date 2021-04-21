@@ -30,7 +30,7 @@ define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
 define ('MODEL_PATH_SHOP', SITE_ROOT . 'module/shop/model/model/');
 
 //Search
-define ('MODEL_PATH_SEARCH', SITE_ROOT . '/module/search/model/model/');
+define ('MODEL_PATH_GENERAL', SITE_ROOT . '/module/general/model/model/');
 
 //Login
 define('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');

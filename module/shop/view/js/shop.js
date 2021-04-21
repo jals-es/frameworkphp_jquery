@@ -427,33 +427,34 @@ function no_result(message) {
 function make_search(content) {
     // console.log("se dispone a hacer el ajax");
     $('<div class="shop_title">Buscando por "' + content + '"</div>').appendTo("#content-shop");
-    $.ajax({
-        type: "POST",
-        url: "module/shop/controller/controller_shop.php?op=search",
-        data: { "content": content },
-        dataType: "JSON"
-    }).done(function(response) {
-        // console.log("realiza el ajax");
-        // console.log(response);
-        if (response.length == 1) {
-            console.log("solo 1 producto");
-            localStorage.setItem('shop_filter', 'prod');
-            localStorage.setItem('shop_filter_id', response[0].cod_prod);
-            show_content();
-        } else {
-            // console.log("varios productos");
-            set_catego(response);
+    friendlyURL("?page=shop&op=search").then(function(data) {
+        $.ajax({
+            type: "POST",
+            url: data,
+            dataType: "JSON",
+            data: { "content": content }
+        }).done(function(response) {
+            // console.log("realiza el ajax");
+            // console.log(response);
+            if (response.length == 1) {
+                // console.log("solo 1 producto");
+                localStorage.setItem('shop_filter', 'prod');
+                localStorage.setItem('shop_filter_id', response[0].cod_prod);
+                show_content();
+            } else {
+                // console.log("varios productos");
+                set_catego(response);
 
-            show_prod();
+                show_prod();
 
-            slider();
-        }
+                slider();
+            }
 
-    }).fail(function(response) {
+        }).fail(function(response) {
+            console.log(response);
+            no_result();
 
-        console.log(response);
-        no_result();
-
+        });
     });
 }
 

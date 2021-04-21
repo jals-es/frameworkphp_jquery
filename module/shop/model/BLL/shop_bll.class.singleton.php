@@ -46,4 +46,7 @@ class shop_bll {
     public function visit_prod_BLL($args){
         return $this -> dao -> visit_prod($args);
     }
+    public function search_BLL($args){
+        return $this -> dao -> search($args[0]);
+    }
 }
