@@ -20,4 +20,7 @@ class general_model {
     public function search($search) {
         return $this -> bll -> search_BLL($search);
     }
+    public function checksession($args) {
+        return $this -> bll -> checksession_BLL($args);
+    }
 }

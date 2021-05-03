@@ -12,6 +12,7 @@ define ('MODULES_PATH', SITE_ROOT . 'module/'); // Modules Path
 define ('VIEW_PATH_INC', SITE_ROOT . 'view/inc/'); // View Path Inc
 define ('RESOURCES', SITE_ROOT . 'resources/'); // Resources Path
 define ('UTILS', SITE_ROOT . 'utils/'); // Utils Path
+
 //////
 // Contact
 define ('JS_PATH_CONTACT', SITE_PATH . 'module/contact/view/js/');
@@ -31,8 +32,11 @@ define ('MODEL_PATH_SHOP', SITE_ROOT . 'module/shop/model/model/');
 
 //Search
 define ('MODEL_PATH_GENERAL', SITE_ROOT . '/module/general/model/model/');
+define('JWT_PATH', MODEL_PATH_GENERAL . 'jwt/');
 
 //Login
+define ('CSS_PATH_LOGIN', SITE_PATH . 'module/login/view/css/');
+define ('JS_PATH_LOGIN', SITE_PATH . 'module/login/view/js/');
 define('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
 define ('MODEL_PATH_LOGIN', SITE_ROOT . '/module/login/model/model/');
 

@@ -13,6 +13,18 @@ function get_content() {
 }
 
 function show_login() {
+
+    if (sessionStorage.getItem('val_return')) {
+        var val_return = JSON.parse(sessionStorage.getItem('val_return'));
+        sessionStorage.removeItem('val_return');
+        // console.log(val_return);
+        if (val_return.type === "true") {
+            alerta("success", "CORRECTO", val_return.msg);
+        } else {
+            alerta(val_return.type, "ALGO NO VA BIEN", val_return.msg);
+        }
+    }
+
     show_content();
 }
 
@@ -29,13 +41,13 @@ function show_content() {
             '<input id="reg-rpass" type="password" placeholder="repeat password"/><div class="error_form" id="error-reg-rpass"></div>' +
             '<input id="reg-email" type="text" placeholder="email address"/><div class="error_form" id="error-reg-email"></div>' +
             '<button>create</button>' +
-            '<p class="message">Already registered? <a href="#">Sign In</a></p>' +
+            '<p class="message">Already registered? <a href="">Sign In</a></p>' +
             '</form>' +
             '<form class="login-form">' +
             '<input id="log-user" type="text" placeholder="username"/>' +
             '<input id="log-pass" type="password" placeholder="password"/><div class="error_form" id="error-log"></div>' +
             '<button>login</button>' +
-            '<p class="message">Not registered? <a href="#">Create an account</a></p>' +
+            '<p class="message">Not registered? <a href="">Create an account</a></p>' +
             '</form>');
 
     $('.message a').on("click", function() {
@@ -111,26 +123,29 @@ function register() {
 function go_register(user, pass, rpass, email) {
     // alert(user + " " + pass + " " + rpass + " " + email);
 
-    ajaxPromise(
-        'module/login/controller/controller_login.php?op=reg',
-        'POST',
-        'JSON', {
-            "user": user,
-            "pass": pass,
-            "rpass": rpass,
-            "email": email
-        }
-    ).then(function(response) {
-        console.log(response);
+    friendlyURL("?page=login&op=reg").then(function(data) {
+        ajaxPromise(
+            data,
+            'POST',
+            'JSON', {
+                "user": user,
+                "pass": pass,
+                "rpass": rpass,
+                "email": email
+            }
+        ).then(function(response) {
+            // console.log(response);
 
-        if (response[0] === "error") {
-            set_errors_reg(response[1]);
-        } else {
-            $('.form form').animate({ height: "toggle", opacity: "toggle" }, "slow");
-            alert("Usuario registrado correctamente");
-        }
-    }).catch(function(response) {
-        console.log(response);
+            if (response[0] === "error") {
+                set_errors_reg(response[1]);
+                alerta("error", "ERROR AL REGISTRAR", "No se ha podido registrar el usuario.");
+            } else {
+                $('.form form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+                alerta("success", "REGISTRADO", "Usuario registrado correctamente");
+            }
+        }).catch(function(response) {
+            console.log(response);
+        });
     });
 }
 
@@ -158,32 +173,35 @@ function login() {
 }
 
 function go_login(user, pass) {
-    ajaxPromise(
-        'module/login/controller/controller_login.php?op=log',
-        'POST',
-        'JSON', {
-            "user": user,
-            "pass": pass
-        }
-    ).then(function(response) {
-        // console.log(response);
-
-        if (response === "error") {
-            $('#error-log').html(" * Usuario o contraseña incorrectos");
-        } else {
-            alert("Bienvenido");
-            localStorage.setItem("token", response);
-            var comingfrom = sessionStorage.getItem("comingfrom");
-            console.log(comingfrom);
-            if (comingfrom !== null) {
-                sessionStorage.removeItem("commingfrom");
-                window.location.href = "?page=" + comingfrom;
-            } else {
-                window.location.href = "./";
+    friendlyURL("?page=login&op=log").then(function(data) {
+        ajaxPromise(
+            data,
+            'POST',
+            'JSON', {
+                "user": user,
+                "pass": pass
             }
-        }
-    }).catch(function(response) {
-        console.log(response);
+        ).then(function(response) {
+            console.log(response);
+
+            alerta(response.type, "", response.msg)
+
+            if (response.type === "success") {
+                localStorage.setItem("token", response.data);
+                var comingfrom = sessionStorage.getItem("comingfrom");
+                // console.log(comingfrom);
+                setTimeout(function() {
+                    if (comingfrom !== null) {
+                        sessionStorage.removeItem("commingfrom");
+                        friendlyURL("?page=" + comingfrom + "/").then(function(data) { window.location.href = data; });
+                    } else {
+                        friendlyURL("?page=home/").then(function(data) { window.location.href = data; });
+                    }
+                }, 2000);
+            }
+        }).catch(function(response) {
+            console.log(response);
+        });
     });
 }
 

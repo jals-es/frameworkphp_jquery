@@ -1,11 +1,11 @@
 <?php 
-$path = $_SERVER['DOCUMENT_ROOT'] . '/clase/appbar/';
-include( $path."model/credentials.php");
-require_once "JWT.php";
+require_once JWT_PATH."JWT.php";
 
 function jwt_encode($idUser){
+    $ini_file = parse_ini_file(MODEL_PATH.'credentials.ini');
+    
     $header = '{"typ":"JWT", "alg":"HS256"}';
-    global $secretJWT;
+    $secretJWT = $ini_file['secretJWT'];
     $payload = '{"iat": "'.time().'","exp": "'.time() + (60*60).'","name": "'.$idUser.'"}';
 
     $JWT = new JWT;
@@ -15,8 +15,9 @@ function jwt_encode($idUser){
 }
 
 function jwt_decode($token){
-    
-    global $secretJWT;
+    $ini_file = parse_ini_file(MODEL_PATH.'credentials.ini');
+
+    $secretJWT = $ini_file['secretJWT'];
 
     $JWT = new JWT;
     $json = $JWT->decode($token, $secretJWT);

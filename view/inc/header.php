@@ -10,7 +10,7 @@
                 <div class="full">
                     <div class="right_header_info">
                         <ul>
-                            <li class="dinone"><label data-tr="Contact Us"></label>: <img style="margin-right: 15px;margin-left: 15px;" src="<?= IMG_PATH?>phone_icon.png" alt="#"><a href="#">987-654-3210</a></li>
+                            <li class="dinone"><label data-tr="Contact"></label>: <img style="margin-right: 15px;margin-left: 15px;" src="<?= IMG_PATH?>phone_icon.png" alt="#"><a href="#">987-654-3210</a></li>
                             <li class="dinone"><img style="margin-right: 15px;" src="<?= IMG_PATH?>mail_icon.png" alt="#"><a href="#">demo@gmail.com</a></li>
                             <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="<?= IMG_PATH?>location_icon.png" alt="#"><a href="#">104 New york , USA</a></li>
                             <li class="button_user">

@@ -20,4 +20,5 @@
 <script src="<?= JS_PATH?>jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= JS_PATH?>jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="<?= JS_PATH?>menu.js"></script>
+<script type="text/javascript" src="<?= JS_PATH?>checksession.js"></script>
 <script type="text/javascript" src="<?= JS_PATH?>translate.js"></script>

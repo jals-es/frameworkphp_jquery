@@ -19,4 +19,7 @@ class general_bll {
     public function search_BLL($search) {
         return $this -> dao -> search($search[0]);
     }
+    public function checksession_BLL($args){
+        return $this -> dao -> checksession($args[0]);
+    }
 }
