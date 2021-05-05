@@ -359,7 +359,8 @@ function friendlyURL(url) {
     return new Promise(function(resolve, reject) {
         //////
         $.ajax({
-            url: 'http://' + window.location.hostname + '/clase/frameworkphp_angular/paths.php?op=get',
+            // url: 'http://' + window.location.hostname + '/clase/frameworkphp_angular/paths.php?op=get',
+            url: SITE_PATH + 'paths.php?op=get',
             type: 'POST',
             dataType: 'JSON'
         }).done(function(data) {
@@ -369,12 +370,17 @@ function friendlyURL(url) {
                 url = url.split("&");
                 for (let i = 0; i < url.length; i++) {
                     let aux = url[i].split("=");
-                    link += "/" + aux[1];
+                    if (i == 0) {
+                        link += "" + aux[1];
+                    } else {
+                        link += "/" + aux[1];
+                    }
                 } // end_for
             } else {
                 link = '/' + url;
             } // end_else
-            resolve("http://" + window.location.hostname + "/clase/frameworkphp_angular" + link);
+            // resolve("http://" + window.location.hostname + "/clase/frameworkphp_angular" + link);
+            resolve(SITE_PATH + "" + link);
         }).fail(function(error) {
             reject(error);
         });
