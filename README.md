@@ -1,6 +1,6 @@
-# FRAMEWORKPHP_ANGULAR | RESTAURANT
+# FRAMEWORKPHP_JQUERY | RESTAURANT
 
-_Project of the third quarter of 1st of Web Applications Development_
+_Project of the third quarter of 3st of Web Applications Development_
 
 * [WEBSITE] - _Click here to go to the web._
 
@@ -54,6 +54,8 @@ _Project of the third quarter of 1st of Web Applications Development_
 | Products list | Datatable, Modal, Delete All, CRUD, JS/PHP validation, Error messages|
 | Details products | All information about the specific product, Show related products with a Google Books Api, Show More button|
 | Footer | GMaps with the position of our restaurants, InfoWindow, Marker, Hidden Api Key, Zoom to customer position|
+| Contact | Contact form whith SMTP|
+| Login | Register, Login, Social Login and Register, Email Verification, JWT|
 
 
 
@@ -62,6 +64,7 @@ _Project of the third quarter of 1st of Web Applications Development_
 * Translate
 * Loading screen
 * GMaps
+* SMTP
 
 ## LICENSE
 
