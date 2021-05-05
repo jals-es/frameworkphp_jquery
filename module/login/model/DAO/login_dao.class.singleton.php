@@ -9,8 +9,8 @@ class login_dao {
         }// end_if
         return self::$_instance;
     }// end_getInstance
-    public function register_user($id_user, $user, $pass, $email, $gravatar){
-        return db::query() -> insert([['id' => $id_user, 'user' => $user, 'pass' => $pass, 'email' => $email, 'avatar' => $gravatar, 'estado' => 0]], 'users') -> execute() -> toJSON() -> getResolve();
+    public function register_user($id_user, $user, $pass, $email, $gravatar, $estado){
+        return db::query() -> insert([['id' => $id_user, 'user' => $user, 'pass' => $pass, 'email' => $email, 'avatar' => $gravatar, 'estado' => $estado]], 'users') -> execute() -> toJSON() -> getResolve();
     }
 
     public function set_token_email($id_user, $token){
@@ -40,5 +40,11 @@ class login_dao {
 
     public function check_by_user($user){
         return db::query() -> select(['*'], 'users') -> where(['user' => [$user]]) -> execute() -> queryToArray(true) -> getResolve();
+    }
+    public function check_social_user($uid){
+        return db::query() -> select(['*'], 'users') -> where(['id' => [$uid]]) -> execute() -> queryToArray(true) -> getResult();
+    }
+    public function get_by_id($uid){
+        return db::query() -> select(['*'], 'users') -> where(['id' => [$uid]]) -> execute() -> queryToArray(true);
     }
 }

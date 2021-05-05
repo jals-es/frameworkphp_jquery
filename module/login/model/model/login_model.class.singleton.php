@@ -32,4 +32,10 @@ class login_model {
     public function check_by_user($args){
         return $this -> bll -> check_by_user_BLL($args);
     }
+    public function check_social_user($args){
+        return $this -> bll -> check_social_user_BLL($args);
+    }
+    public function get_by_id($args){
+        return $this -> bll -> get_by_id_BLL($args);
+    }
 }

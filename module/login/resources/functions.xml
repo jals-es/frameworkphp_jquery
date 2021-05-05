@@ -16,4 +16,8 @@
         <name>verify</name>
         <uri>verify</uri>
     </function>
+    <function>
+        <name>social</name>
+        <uri>social</uri>
+    </function>
 </functions>

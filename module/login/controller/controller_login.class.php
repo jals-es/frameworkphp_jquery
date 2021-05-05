@@ -74,7 +74,7 @@ class controller_login{
                 $rand = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
                 $id_user = hash_hmac("sha256", $fecha . "_" . $rand, $secret);
 
-                $register = common::accessModel('login_model', 'register_user', [$id_user, $user, $pwd_hash, $email, $gravatar]); //Registra el usuario y si es todo correcto retorna el id de usuario
+                $register = common::accessModel('login_model', 'register_user', [$id_user, $user, $pwd_hash, $email, $gravatar, 0]); //Registra el usuario y si es todo correcto retorna el id de usuario
                 // echo "register " . $register;
                 if($register){
 
@@ -176,5 +176,46 @@ class controller_login{
         }else{
             common::loadError();
         }
+    }
+
+    function social(){
+        if(isset($_POST['uid']) && isset($_POST['user']) && isset($_POST['email']) && isset($_POST['avatar'])){
+            
+            $uid = $_POST['uid'];
+            $username = $_POST['user'];
+            $email = $_POST['email'];
+            $avatar = $_POST['avatar'];
+
+            $return['type'] = "error";
+
+            $check_user = common::accessModel('login_model', 'check_social_user', [$uid]);
+            
+            if($check_user -> num_rows == 0){
+                // El usuario existe
+                
+                $register = common::accessModel('login_model', 'register_user', [$uid, $username, NULL, $email, $avatar, 1]);
+
+                if($register){
+                    $return['type'] = "success";
+                }else{
+                    $return['type'] = "error";
+                    $return['msg'] = "No se ha podido registrar a ".$username;
+                }
+            }else{
+                $return['type'] = "success";
+            }
+
+            if($return['type'] === "success"){
+                
+                require JWT_PATH . 'middleware.php';
+
+                $token = jwt_encode($uid);
+
+                $return['msg'] = "Bienvenido ".$username;
+                $return['data'] = $token;
+            }
+
+            echo json_encode($return);
+        }   
     }
 }

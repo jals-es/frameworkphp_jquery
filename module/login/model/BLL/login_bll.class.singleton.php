@@ -15,7 +15,7 @@ class login_bll {
         return self::$_instance;
     }// end_getInstance
     public function register_user_BLL($args){
-        return $this -> dao -> register_user($args[0], $args[1], $args[2], $args[3], $args[4]);
+        return $this -> dao -> register_user($args[0], $args[1], $args[2], $args[3], $args[4], $args[5]);
     }
     public function set_token_email_BLL($args){
         return $this -> dao -> set_token_email($args[0], $args[1]);
@@ -31,5 +31,11 @@ class login_bll {
     }
     public function check_by_user_BLL($args){
         return $this -> dao -> check_by_user($args[0]);
+    }
+    public function check_social_user_BLL($args){
+        return $this -> dao -> check_social_user($args[0]);
+    }
+    public function get_by_id_BLL($args){
+        return $this -> dao -> get_by_id($args[0]);
     }
 }

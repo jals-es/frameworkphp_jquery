@@ -8,6 +8,7 @@ function get_content() {
         case "1":
         default:
             show_login();
+            get_click_social();
             break;
     }
 }
@@ -47,6 +48,8 @@ function show_content() {
             '<input id="log-user" type="text" placeholder="username"/>' +
             '<input id="log-pass" type="password" placeholder="password"/><div class="error_form" id="error-log"></div>' +
             '<button>login</button>' +
+            '<div id="log-gmail" class="button">Entra con Gmail</div>' +
+            '<div id="log-github" class="button">Entra con GitHub</div>' +
             '<p class="message">Not registered? <a href="">Create an account</a></p>' +
             '</form>');
 
@@ -184,7 +187,7 @@ function go_login(user, pass) {
         ).then(function(response) {
             console.log(response);
 
-            alerta(response.type, "", response.msg)
+            alerta(response.type, "", response.msg);
 
             if (response.type === "success") {
                 localStorage.setItem("token", response.data);
@@ -223,6 +226,116 @@ function set_errors_reg(errors) {
     }
 }
 
+function set_firebase() {
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = get_firebase();
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    // console.log(firebaseConfig);
+}
+
+function get_click_social() {
+    set_firebase();
+    // console.log("get_click");
+    $("#log-gmail").on("click", function() {
+        social_gmail();
+    });
+    $("#log-github").on("click", function() {
+        social_github();
+    });
+}
+
+function social_gmail() {
+    // console.log("gmail");
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('email');
+
+    firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+
+            var user = result.user;
+
+            var uid = user.uid;
+            var username = user.displayName;
+            var email = user.email;
+            var avatar = user.photoURL;
+
+
+            login_social(uid, username, email, avatar);
+            // ...
+        }).catch((error) => {
+            // console.log('Se ha encontrado un error:', error);
+            alerta("error", "ERROR", error.message);
+            // ...
+        });
+}
+
+function social_github() {
+    // console.log("github");
+
+    var provider = new firebase.auth.GithubAuthProvider();
+
+    firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+
+            var user = result.user;
+
+            var uid = user.uid;
+            var username = user.displayName;
+            var email = user.email;
+            var avatar = user.photoURL;
+
+
+            login_social(uid, username, email, avatar);
+            // ...
+        }).catch((error) => {
+            // console.log('Se ha encontrado un error:', error);
+
+            alerta("error", "ERROR", error.message);
+            // ...
+        });
+}
+
+function login_social(uid, user, email, avatar) {
+    friendlyURL("?page=login&op=social").then(function(data) {
+        ajaxPromise(
+            data,
+            'POST',
+            'JSON', {
+                "uid": uid,
+                "user": user,
+                "email": email,
+                "avatar": avatar
+            }
+        ).then(function(response) {
+            console.log(response);
+
+            alerta(response.type, "", response.msg);
+
+            if (response.type === "success") {
+                localStorage.setItem("token", response.data);
+                var comingfrom = sessionStorage.getItem("comingfrom");
+                // console.log(comingfrom);
+                setTimeout(function() {
+                    if (comingfrom !== null) {
+                        sessionStorage.removeItem("commingfrom");
+                        friendlyURL("?page=" + comingfrom + "/").then(function(data) { window.location.href = data; });
+                    } else {
+                        friendlyURL("?page=home/").then(function(data) { window.location.href = data; });
+                    }
+                }, 2000);
+            }
+        }).catch(function(response) {
+            // console.log(response);
+            alerta("error", "ERROR", "Algo ha fallado");
+        });
+    });
+}
 
 $(document).ready(function() {
     get_content();
