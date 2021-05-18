@@ -1,6 +1,6 @@
 # FRAMEWORKPHP_JQUERY | RESTAURANT
 
-_Project of the third quarter of 3st of Web Applications Development_
+_Project of the third quarter of 1st of Web Applications Development_
 
 * [WEBSITE] - _Click here to go to the web._
 
